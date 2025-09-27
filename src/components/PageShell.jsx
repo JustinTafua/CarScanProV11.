@@ -19,4 +19,8 @@ export default function PageShell({ children }) {
       </div>
     </GarageLayout>
   );
-}
+}// top of src/pages/index.js
+import InstallPrompt from '../components/InstallPrompt';
+
+// inside your CTA/Button area:
+<InstallPrompt className="btn" />
