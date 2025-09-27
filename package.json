@@ -7,11 +7,23 @@
     "build": "next build",
     "start": "next start"
   },
+  "engines": { "node": ">=18.17 <23" },
   "dependencies": {
     "@tensorflow-models/mobilenet": "^2.1.0",
     "@tensorflow/tfjs": "^4.18.0",
     "next": "14.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
+  },
+  "optionalDependencies": {
+    "@next/swc-darwin-arm64": "14.0.0",
+    "@next/swc-darwin-x64": "14.0.0",
+    "@next/swc-linux-arm64-gnu": "14.0.0",
+    "@next/swc-linux-arm64-musl": "14.0.0",
+    "@next/swc-linux-x64-gnu": "14.0.0",
+    "@next/swc-linux-x64-musl": "14.0.0",
+    "@next/swc-win32-arm64-msvc": "14.0.0",
+    "@next/swc-win32-ia32-msvc": "14.0.0",
+    "@next/swc-win32-x64-msvc": "14.0.0"
   }
 }
