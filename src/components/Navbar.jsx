@@ -1,20 +1,30 @@
-import Link from "next/link";
-
+// src/components/Navbar.jsx
 export default function Navbar() {
+  const linkStyle = { textDecoration: 'none', padding: '6px 10px', color: '#111' };
+
   return (
-    <nav style={{ padding: "1rem", background: "#0d47a1", color: "white" }}>
-      <ul style={{ display: "flex", gap: "1rem", listStyle: "none" }}>
-        <li><Link href="/">Home</Link></li>
-        <li><Link href="/scan">Scan</Link></li>
-        <li><Link href="/pricing">Pricing</Link></li>
-        <li><Link href="/feedback">Feedback</Link></li>
-        <li><Link href="/about">About</Link></li>
-        <li><Link href="/settings">Settings</Link></li>
-        <li><Link href="/privacy">Privacy</Link></li>
-        <li><Link href="/terms">Terms</Link></li>
-      // inside the right-side links
-<a style={link} href="/assistant">Assistant</a>
-      </ul>
+    <nav
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        padding: '12px',
+        borderBottom: '1px solid #eee',
+        background: '#fff',
+        borderRadius: 12
+      }}
+    >
+      <a href="/" style={{ ...linkStyle, fontWeight: 700 }}>CarScan Pro</a>
+
+      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+        <a style={linkStyle} href="/scan">Scan</a>
+        <a style={linkStyle} href="/onboarding">Onboarding</a>
+        <a style={linkStyle} href="/browse">Browse</a>
+        <a style={linkStyle} href="/assistant">Assistant</a>
+        <a style={linkStyle} href="/pricing">Pro</a>
+        <a style={linkStyle} href="/about">About</a>
+        <a style={linkStyle} href="/feedback">Feedback</a>
+        <a style={linkStyle} href="/settings">Settings</a>
+      </div>
     </nav>
   );
 }
