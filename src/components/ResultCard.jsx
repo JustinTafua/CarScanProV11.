@@ -1,24 +1,10 @@
-import React from "react";
-
-export default function ResultCard({ title, description, image }) {
+export default function ResultCard({ label }) {
   return (
-    <div className="result-card">
-      {image && <img src={image} alt={title} />}
-      <h3>{title}</h3>
-      <p>{description}</p>
-      <style jsx>{`
-        .result-card {
-          border: 1px solid #ddd;
-          padding: 16px;
-          margin: 12px 0;
-          border-radius: 8px;
-          background: #fff;
-        }
-        img {
-          max-width: 100%;
-          border-radius: 8px;
-        }
-      `}</style>
+    <div style={{marginTop:8,padding:12,border:'1px solid #ddd',borderRadius:10,background:'#fff'}}>
+      <b>Top Match:</b> <span style={{opacity:.9}}>{label}</span>
+      <div style={{fontSize:12,opacity:.7,marginTop:6}}>
+        For best results, use good lighting and fill the frame with the part.
+      </div>
     </div>
   );
 }
