@@ -12,6 +12,7 @@ export default function Navbar() {
         background: '#fff',
         borderRadius: 12
       }}
+      aria-label="Main navigation"
     >
       <a href="/" style={{ ...linkStyle, fontWeight: 700 }}>CarScan Pro</a>
 
