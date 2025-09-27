@@ -12,6 +12,8 @@ export default function Navbar() {
         <li><Link href="/settings">Settings</Link></li>
         <li><Link href="/privacy">Privacy</Link></li>
         <li><Link href="/terms">Terms</Link></li>
+      // inside the right-side links
+<a style={link} href="/assistant">Assistant</a>
       </ul>
     </nav>
   );
