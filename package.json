@@ -1,5 +1,5 @@
 {
-  "name": "carscanpro-v11",
+  "name": "carscan-pro",
   "version": "11.0.0",
   "private": true,
   "scripts": {
@@ -8,11 +8,10 @@
     "start": "next start"
   },
   "dependencies": {
-    "@tensorflow-models/mobilenet": "2.1.0",
-    "@tensorflow/tfjs": "4.14.0",
+    "@tensorflow-models/mobilenet": "^2.1.0",
+    "@tensorflow/tfjs": "^4.18.0",
     "next": "14.0.0",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "stripe": "14.25.0"
+    "react-dom": "18.2.0"
   }
 }
