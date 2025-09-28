@@ -1,26 +1,27 @@
 {
-  "fixed": {
-    "background": "/garage/background.jpg",
-    "toolbox": { "src": "/garage/toolbox_snapon.png", "x": 40, "y": 380, "w": 180 },
-    "posters": [
-      { "src": "/garage/poster_leander_auto_mall.png", "x": 680, "y": 40,  "w": 220 },
-      { "src": "/garage/poster_nissan.png",               "x": 680, "y": 280, "w": 220 },
-      { "src": "/garage/poster_built_with_carscan_pro.png","x": 40,  "y": 40,  "w": 260 }
-    ]
-  },
-  "tools": [
-    "/garage/tools/jack_stands.png",
-    "/garage/tools/jack.png",
-    "/garage/tools/engine_hoist.png",
-    "/garage/tools/drill.png",
-    "/garage/tools/wrench.png",
-    "/garage/tools/headers.png",
-    "/garage/tools/turbo.png"
+  "background": "/garage/bg.jpg",
+  "carBase": "/garage/car_base.png",
+  "wheelOverlays": [
+    "/garage/rims/rim1.png",
+    "/garage/rims/rim2.png",
+    "/garage/rims/rim3.png"
   ],
-  "carStages": [
-    { "name": "stage-1", "body": "/garage/car/r32_4d_body_base.png", "kit": "/garage/car/kits/stock.png",    "wheels": "/garage/car/wheels/stock.png", "color": "#b0b0b0" },
-    { "name": "stage-2", "body": "/garage/car/r32_4d_body_base.png", "kit": "/garage/car/kits/type-m.png",   "wheels": "/garage/car/wheels/te37.png",  "color": "#1f5eff" },
-    { "name": "stage-3", "body": "/garage/car/r32_4d_body_base.png", "kit": "/garage/car/kits/gtr_style.png","wheels": "/garage/car/wheels/bbs.png",   "color": "#111111" },
-    { "name": "stage-4", "body": "/garage/car/r32_4d_body_base.png", "kit": "/garage/car/kits/track.png",    "wheels": "/garage/car/wheels/rays.png",  "color": "#e21a1a" }
+  "toolSprites": [
+    "/garage/tools/box.png",
+    "/garage/tools/jack.png",
+    "/garage/tools/stand.png",
+    "/garage/tools/drill.png",
+    "/garage/tools/headers.png",
+    "/garage/tools/turbo.png",
+    "/garage/tools/hoist.png",
+    "/garage/tools/wrench.png"
+  ],
+  "colors": [
+    { "name": "Gunmetal",      "filter": "hue-rotate(0deg) saturate(0.7) brightness(1.0)" },
+    { "name": "Red",           "filter": "hue-rotate(330deg) saturate(1.5) brightness(1.0)" },
+    { "name": "Midnight Blue", "filter": "hue-rotate(220deg) saturate(1.2) brightness(0.95)" },
+    { "name": "Pearl White",   "filter": "saturate(0.2) brightness(1.25)" },
+    { "name": "Emerald",       "filter": "hue-rotate(130deg) saturate(1.2) brightness(1.0)" },
+    { "name": "Bronze",        "filter": "hue-rotate(50deg)  saturate(1.0) brightness(1.05)" }
   ]
 }
