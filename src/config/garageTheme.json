@@ -1,27 +1,19 @@
 {
-  "background": "/garage/bg.jpg",
-  "carBase": "/garage/car_base.png",
-  "wheelOverlays": [
+  "colors": ["#7a7a7a", "#2b6cb0", "#d97706", "#16a34a", "#b91c1c", "#111827"],
+  "rims": [
     "/garage/rims/rim1.png",
-    "/garage/rims/rim2.png",
-    "/garage/rims/rim3.png"
+    "/garage/rims/rim2.png"
   ],
-  "toolSprites": [
-    "/garage/tools/box.png",
+  "tools": [
     "/garage/tools/jack.png",
-    "/garage/tools/stand.png",
-    "/garage/tools/drill.png",
-    "/garage/tools/headers.png",
-    "/garage/tools/turbo.png",
-    "/garage/tools/hoist.png",
-    "/garage/tools/wrench.png"
+    "/garage/tools/stands.png",
+    "/garage/tools/impact.png",
+    "/garage/tools/hoist.png"
   ],
-  "colors": [
-    { "name": "Gunmetal",      "filter": "hue-rotate(0deg) saturate(0.7) brightness(1.0)" },
-    { "name": "Red",           "filter": "hue-rotate(330deg) saturate(1.5) brightness(1.0)" },
-    { "name": "Midnight Blue", "filter": "hue-rotate(220deg) saturate(1.2) brightness(0.95)" },
-    { "name": "Pearl White",   "filter": "saturate(0.2) brightness(1.25)" },
-    { "name": "Emerald",       "filter": "hue-rotate(130deg) saturate(1.2) brightness(1.0)" },
-    { "name": "Bronze",        "filter": "hue-rotate(50deg)  saturate(1.0) brightness(1.05)" }
+  "placements": [
+    { "x": 0.18, "y": 0.90 },
+    { "x": 0.82, "y": 0.92 },
+    { "x": 0.38, "y": 0.94 },
+    { "x": 0.62, "y": 0.88 }
   ]
 }
