@@ -1,104 +1,104 @@
 // src/components/GarageLayout.jsx
-import { useEffect, useMemo, useRef, useState } from "react";
-import theme from "../config/garageTheme.json";
-
-const rims = Array.isArray(theme?.rims) ? theme.rims : [];
-const tools = Array.isArray(theme?.tools) ? theme.tools : [];
-const colors = Array.isArray(theme?.colors) ? theme.colors : ["#C0C0C0"];
-const INTERVAL = Number(theme?.intervalSec || 12) * 1000;
-
-function randItem(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
-function rand(min, max) { return Math.random() * (max - min) + min; }
+import { useEffect, useMemo, useState } from "react";
+import { getNextStage, getStageFilter, randomTools } from "../lib/stage";
 
 export default function GarageLayout({ children }) {
-  const [state, setState] = useState({
-    color: randItem(colors),
-    rim: randItem(rims || []),
-    toolSet: []
-  });
-  const timer = useRef(null);
+  const [stage, setStage] = useState(0);
 
-  // pick a few random tools each cycle
-  const nextState = () => ({
-    color: randItem(colors),
-    rim: randItem(rims || []),
-    toolSet: (tools || []).sort(() => Math.random() - 0.5).slice(0, 3).map(t => ({
-      file: t,
-      left: `${rand(4, 70)}%`,
-      top: `${rand(55, 82)}%`,
-      rotate: `${rand(-12, 12)}deg`,
-      scale: rand(0.7, 1.1)
-    }))
-  });
-
+  // advance stage every 6s as users move around
   useEffect(() => {
-    // client only
-    setState(nextState());
-    timer.current = setInterval(() => setState(nextState()), INTERVAL);
-    return () => clearInterval(timer.current);
+    const id = setInterval(() => setStage((s) => getNextStage(s)), 6000);
+    return () => clearInterval(id);
   }, []);
 
-  // keep values stable within a render
-  const memo = useMemo(() => state, [state]);
+  const filter = useMemo(() => getStageFilter(stage), [stage]);
+  const tools = useMemo(() => randomTools(stage), [stage]);
 
   return (
     <div style={styles.wrap}>
-      {/* fixed garage */}
-      <img src="/garage/bg.jpg" alt="" style={styles.bg} />
+      {/* Fixed garage image */}
+      <div style={styles.backdrop} />
+      {/* Scrim for readability */}
+      <div style={styles.scrim} />
 
-      {/* color tint over the car region (full for now) */}
-      <div style={{
-        ...styles.tint,
-        background: memo.color,
-        mixBlendMode: "soft-light",
-        opacity: 0.45
-      }} />
+      {/* Skyline overlay that changes (color/filter/rims illusion) */}
+      <div style={{ ...styles.car, filter }} />
 
-      {/* rim overlay (optional) */}
-      {memo.rim && (
-        <img src={`/garage/rims/${memo.rim}`} alt="" style={styles.rim} />
-      )}
-
-      {/* scattered tools */}
-      {(memo.toolSet || []).map((t, i) => (
+      {/* Random tool decals (optional images) */}
+      {tools.map((t, i) => (
         <img
           key={i}
           src={`/garage/tools/${t.file}`}
           alt=""
           style={{
             ...styles.tool,
-            left: t.left, top: t.top,
-            transform: `rotate(${t.rotate}) scale(${t.scale})`
+            left: t.left,
+            bottom: t.bottom,
+            transform: `rotate(${t.rotate}deg)`,
+            display: t.file ? "block" : "none",
           }}
+          loading="lazy"
         />
       ))}
 
-      {/* page content on top */}
-      <div style={styles.content}>
-        {children}
-      </div>
+      {/* Content sits above visuals */}
+      <div style={styles.content}>{children}</div>
     </div>
   );
 }
 
 const styles = {
-  wrap: { position: "relative", minHeight: "100vh", overflow: "hidden" },
-  bg: {
-    position: "fixed", inset: 0,
-    width: "100%", height: "100%", objectFit: "cover",
-    zIndex: 0
+  wrap: {
+    position: "relative",
+    minHeight: "100vh",
+    overflow: "hidden",
+    backgroundColor: "#0a0b0f",
   },
-  tint: {
-    position: "fixed", inset: 0, zIndex: 1, pointerEvents: "none"
+  backdrop: {
+    position: "absolute",
+    inset: 0,
+    backgroundImage: "url('/garage/backdrop.jpg')",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    filter: "none",
+    zIndex: 0,
   },
-  rim: {
-    position: "fixed",
-    bottom: "14%", left: "55%",
-    width: "20%",
-    zIndex: 2, opacity: 0.9, pointerEvents: "none"
+  scrim: {
+    position: "absolute",
+    inset: 0,
+    background:
+      "linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,.45) 40%, rgba(0,0,0,.6) 100%)",
+    zIndex: 5,
+    pointerEvents: "none",
+  },
+  car: {
+    position: "absolute",
+    left: "50%",
+    bottom: 0,
+    width: "min(1200px, 96vw)",
+    height: "56vh",
+    transform: "translateX(-50%)",
+    backgroundImage: "url('/garage/skyline.png')",
+    backgroundPosition: "bottom center",
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "contain",
+    zIndex: 6,
+    pointerEvents: "none",
+    transition: "filter 600ms ease",
   },
   tool: {
-    position: "fixed", zIndex: 2, width: "16%", opacity: 0.9, pointerEvents: "none"
+    position: "absolute",
+    width: 64,
+    opacity: 0.9,
+    zIndex: 4,
+    pointerEvents: "none",
   },
-  content: { position: "relative", zIndex: 3 }
+  content: {
+    position: "relative",
+    zIndex: 10,
+    color: "#fff",
+    textShadow: "0 3px 18px rgba(0,0,0,.7)",
+    paddingTop: 80,
+    paddingBottom: 64,
+  },
 };
