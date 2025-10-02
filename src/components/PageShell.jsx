@@ -20,6 +20,6 @@ const styles = {
     maxWidth: 1100,
     margin: "0 auto",
     display: "grid",
-    gap: 18
-  }
+    gap: 18,
+  },
 };
