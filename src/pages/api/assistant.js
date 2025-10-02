@@ -1,28 +1,24 @@
-export default async function handler(req, res){
-  try{
-    const { messages } = JSON.parse(req.body||'{}');
-    const apiKey = process.env.OPENAI_API_KEY;
-    if(!apiKey){
-      return res.status(200).json({ reply: "AI Assistant demo: Add OPENAI_API_KEY in Vercel → Settings → Environment Variables for real answers." });
-    }
-    const r = await fetch("https://api.openai.com/v1/chat/completions",{
-      method:"POST",
-      headers:{
-        "Content-Type":"application/json",
-        "Authorization":`Bearer ${apiKey}`
-      },
+export default async function handler(req, res) {
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Use POST' });
+  const { messages = [] } = req.body || {};
+  const offline =
+    "I'm in offline mode. Tips:\n- Good light, hold steady\n- Try common socket sizes (10/12/14mm on many Japanese cars)\n- Use Guides for detailed steps";
+  if (!process.env.OPENAI_API_KEY) return res.status(200).json({ reply: offline });
+
+  try {
+    const r = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${process.env.OPENAI_API_KEY}` },
       body: JSON.stringify({
-        model: "gpt-4o-mini",
-        messages: [
-          { role:"system", content:"You are a helpful automotive repair assistant for CarScan Pro. Be concise, step-by-step, emphasize safety and torque specs where relevant." },
-          ...(messages||[])
-        ]
+        model: process.env.OPENAI_MODEL || 'gpt-4o-mini',
+        temperature: 0.3,
+        messages: [{ role: 'system', content: 'You are the CarScan Pro repair assistant.' }, ...messages.slice(-30)]
       })
     });
     const data = await r.json();
-    const reply = data?.choices?.[0]?.message?.content || "Sorry, I couldn’t generate a response.";
-    res.status(200).json({ reply });
-  }catch(e){
-    res.status(200).json({ reply: "Assistant error. Please try again." });
+    const reply = data?.choices?.[0]?.message?.content || offline;
+    return res.status(200).json({ reply });
+  } catch {
+    return res.status(200).json({ reply: offline });
   }
 }
