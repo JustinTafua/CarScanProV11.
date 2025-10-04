@@ -19,5 +19,8 @@ export default function Document(){
         <Main/><NextScript/>
       </body>
     </Html>
-  );
+  );<link rel="preload" as="image" href="/mockup_stage1.png" />
+<link rel="preload" as="image" href="/mockup_stage2.png" />
+<link rel="preload" as="image" href="/mockup_stage3.png" />
+<link rel="preload" as="image" href="/mockup_stage4.png" />
 }
