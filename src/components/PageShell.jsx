@@ -1,25 +1,14 @@
 // src/components/PageShell.jsx
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import GarageLayout from "./GarageLayout";
+import GarageBackground from "./GarageBackground";
 
 export default function PageShell({ children }) {
   return (
-    <GarageLayout>
+    <GarageBackground>
       <Navbar />
-      <main style={styles.main}>{children}</main>
+      <main style={{ padding: "16px 16px 80px" }}>{children}</main>
       <Footer />
-    </GarageLayout>
+    </GarageBackground>
   );
 }
-
-const styles = {
-  main: {
-    paddingTop: 80,
-    paddingBottom: 60,
-    maxWidth: 1100,
-    margin: "0 auto",
-    display: "grid",
-    gap: 18,
-  },
-};
