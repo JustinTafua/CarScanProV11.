@@ -1,26 +1,26 @@
 // src/pages/_document.js
-import { Html, Head, Main, NextScript } from 'next/document';
+import { Html, Head, Main, NextScript } from "next/document";
 
-export default function Document(){
+export default function Document() {
   return (
-    <Html>
+    <Html lang="en">
       <Head>
+        {/* PWA basics */}
         <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
-        <meta name="theme-color" content="#0b5fff" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="description" content="CarScan Pro — AI camera to identify car parts, bolts, and tools with guides and recommendations." />
-        <meta property="og:title" content="CarScan Pro" />
-        <meta property="og:description" content="AI-powered automotive assistant." />
-        <meta property="og:type" content="website" />
+        <meta name="theme-color" content="#111111" />
+        <link rel="icon" href="/icons/icon-192.png" sizes="192x192" />
+        <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+
+        {/* Preload build-stage backgrounds to avoid flicker */}
+        <link rel="preload" as="image" href="/mockup_stage1.png" />
+        <link rel="preload" as="image" href="/mockup_stage2.png" />
+        <link rel="preload" as="image" href="/mockup_stage3.png" />
+        <link rel="preload" as="image" href="/mockup_stage4.png" />
       </Head>
       <body>
-        <Main/><NextScript/>
+        <Main />
+        <NextScript />
       </body>
     </Html>
-  );<link rel="preload" as="image" href="/mockup_stage1.png" />
-<link rel="preload" as="image" href="/mockup_stage2.png" />
-<link rel="preload" as="image" href="/mockup_stage3.png" />
-<link rel="preload" as="image" href="/mockup_stage4.png" />
+  );
 }
